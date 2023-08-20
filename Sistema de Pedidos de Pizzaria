@@ -1,0 +1,58 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class PizzaOrderSystem {
+
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Sistema de Pedidos de Pizzaria");
+		
+		JPanel toppingsPanel = new JPanel();
+		JLabel toppingsLabel = new JLabel("Selecione os ingredientes:");
+		
+		JCheckBox cheeseCheckbox = new JCheckBox("Queijo");
+		JCheckBox pepperoniCheckBox = new JCheckBox("Pepperoni");
+		JCheckBox mushroomsCheckBox = new JCheckBox("Cogumelos");
+		JCheckBox onionsCheckBox = new JCheckBox("Cebolas");
+		
+		toppingsPanel.setLayout(new GridLayout(0,1));
+		toppingsPanel.add(toppingsLabel);
+		toppingsPanel.add(cheeseCheckbox);
+		toppingsPanel.add(pepperoniCheckBox);
+		toppingsPanel.add(mushroomsCheckBox);
+		toppingsPanel.add (onionsCheckBox);
+		
+		JButton orderButton = new JButton("Fazer Pedido");
+	
+		orderButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					StringBuilder orderDetails = new StringBuilder("Pedido: \n");
+					if (cheeseCheckbox.isSelected()) {
+						orderDetails.append("Queijo\n");
+					}
+					if (pepperoniCheckBox.isSelected()) {
+						orderDetails.append("Pepperoni\n");
+					}
+					if (mushroomsCheckBox.isSelected()) {
+						orderDetails.append("Cogumelos\n");
+					}
+					if (onionsCheckBox.isSelected()) {
+						orderDetails.append("Cebolas\n");
+					}
+					if (orderDetails.toString().equals("Pedido: ")) {
+						orderDetails.append("Nenhum ingrediente selecionado\n");
+					}
+					JOptionPane.showMessageDialog(frame, orderDetails.toString());
+				}
+			});
+			
+			frame.setLayout(new BorderLayout());
+			frame.add(toppingsPanel, BorderLayout.CENTER);
+			frame.add(orderButton, BorderLayout.SOUTH);
+			
+			frame.setSize(300, 200);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+	}
+}
